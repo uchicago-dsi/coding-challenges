@@ -1,5 +1,7 @@
 # DSI Coding Challenges
 
+This repo contains code and data used to build, conduct, and evaluate take-home and in-person coding challenges for UChicago DSI's technical interviews.
+
 ## Challenges
 
 ### Water Bottle Take-Home
