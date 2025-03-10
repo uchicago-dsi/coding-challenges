@@ -15,10 +15,10 @@ import pandas as pd
 
 DATA_DIR = Path("data")
 RAW_DATA_DIR = DATA_DIR / "raw"
-PROCESSED_DATA_DIR = DATA_DIR / "preprocessed2"
+PROCESSED_DATA_DIR = DATA_DIR / "preprocessed"
 
 RAW_MAP_FPATH = DATA_DIR / "raw_map.json"
-PROCESSED_MAP_FPATH = DATA_DIR / "preprocessed2_map.json"
+PROCESSED_MAP_FPATH = DATA_DIR / "preprocessed_map.json"
 
 def preprocess_mp3(mp3_fpath: Path, output_fpath: Path):
     y, sr = librosa.load(mp3_fpath)
