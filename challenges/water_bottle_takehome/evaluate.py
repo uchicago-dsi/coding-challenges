@@ -7,8 +7,9 @@ from candidate_code import water_bottle_challenge
 
 DATA_DIR = Path("data/")
 PREPROCESSED_DATA_DIR = DATA_DIR / "preprocessed"
-ANSWER_KEY_PATH = DATA_DIR / "class_map.json"
+ANSWER_KEY_PATH = DATA_DIR / "preprocessed_map.json"
 
+RESULTS_PATH = Path("candidate_code/evaluation_results.txt")
 
 if __name__ == "__main__":
     # Load answer key
@@ -36,7 +37,7 @@ if __name__ == "__main__":
     all_combo_counts = df.groupby(["type", "actual", "predicted"]).size().reset_index()
 
     # Write to file in a readable format
-    with open("candidate_code/evaluation_results.txt", "w") as f:
+    with Path.open(RESULTS_PATH, "w") as f:
         # Write total correct and incorrect counts
         f.write("Top-line results:\n")
         for idx, row in correct_counts.iterrows():
