@@ -1,8 +1,9 @@
+"""Evaluate candidate's classifier function on preprocessed audio data."""
+
 import json
 from pathlib import Path
 
 import pandas as pd
-
 from candidate_code import water_bottle_challenge
 
 DATA_DIR = Path("data/")
@@ -18,23 +19,39 @@ if __name__ == "__main__":
     # Run candidate's classifier function
     predictions = {}
     for fpath in PREPROCESSED_DATA_DIR.glob("*.csv"):
-        predictions[fpath.stem] = water_bottle_challenge.classify_preprocessed_audio(fpath)
+        predictions[fpath.stem] = water_bottle_challenge.classify_preprocessed_audio(
+            fpath
+        )
 
     # Join all info about predictions into a single DataFrame
-    df = pd.DataFrame({
-        "predicted": predictions,
-        "actual": answer_key,
-    })
-    df["predicted"] = df["predicted"].map({0: "top", 1: "bottom"})
-    df["is_correct"] = df["predicted"] == df["actual"]
-    df["type"] = df.index.str.split("_").str[0]
-    df["type"] = df["type"].map({"top": "labeled", "bottom": "labeled"}).fillna(df["type"])
+    results = pd.DataFrame(
+        {
+            "predicted": predictions,
+            "actual": answer_key,
+        }
+    )
+    results["predicted"] = results["predicted"].map({0: "top", 1: "bottom"})
+    results["is_correct"] = results["predicted"] == results["actual"]
+    results["type"] = results.index.str.split("_").str[0]
+    results["type"] = (
+        results["type"]
+        .map({"top": "labeled", "bottom": "labeled"})
+        .fillna(results["type"])
+    )
 
     # Get counts of correct predictions
-    correct_counts = df.groupby(["type", "is_correct"]).size().unstack("is_correct").fillna(0).astype(int)
+    correct_counts = (
+        results.groupby(["type", "is_correct"])
+        .size()
+        .unstack("is_correct")
+        .fillna(0)
+        .astype(int)
+    )
 
     # Get counts of all combinations of actual and predicted
-    all_combo_counts = df.groupby(["type", "actual", "predicted"]).size().reset_index()
+    all_combo_counts = (
+        results.groupby(["type", "actual", "predicted"]).size().reset_index()
+    )
 
     # Write to file in a readable format
     with Path.open(RESULTS_PATH, "w") as f:
@@ -46,6 +63,8 @@ if __name__ == "__main__":
         f.write("\nAll combination counts:\n")
         for col in all_combo_counts.columns:
             all_combo_counts[col] = all_combo_counts[col].astype(str)
-            all_combo_counts[col] = all_combo_counts[col].str.pad(all_combo_counts[col].str.len().max()+1, side='right')
-        for idx, row in all_combo_counts.iterrows():
+            all_combo_counts[col] = all_combo_counts[col].str.pad(
+                all_combo_counts[col].str.len().max() + 1, side="right"
+            )
+        for _, row in all_combo_counts.iterrows():
             f.write(f"{row['type']}\t{row['actual']}\t{row['predicted']}\t{row[0]}\n")
