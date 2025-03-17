@@ -9,6 +9,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+from candidate_code.water_bottle_challenge import classify_preprocessed_audio
 
 def setup_logger(verbose=False):
     """Set up and configure root logger with appropriate level based on verbose flag."""
@@ -49,31 +50,23 @@ def make_predictions(directory_path) -> dict:
     Returns:
         dict: A dictionary where each key is a file name and each value is the prediction.
     """
-    logging.info(f"Starting analysis on directory: {directory_path}")
-    
-    if not Path(directory_path).exists():
-        logging.error(f"Directory does not exist: {directory_path}")
-        return False
-    
-    if not Path(directory_path).is_dir():
-        logging.error(f"Path is not a directory: {directory_path}")
-        return False
-    
-    logging.debug(f"Directory {directory_path} is valid, proceeding with analysis")
-        
     logging.info("Analysis completed successfully")
+    predictions = {}
+    for fpath in Path(directory_path).glob('*.csv'):
+        predictions[fpath.stem] = classify_preprocessed_audio(fpath)
 
-    return {}  # Placeholder for actual predictions
+    return predictions
 
 
 if __name__ == "__main__":
     # Set up argument parser
     parser = argparse.ArgumentParser(description='Run analysis on specified directory')
     parser.add_argument('directory', type=str, help='Path to the directory for analysis')
-    parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose output')
-    
-    # Parse arguments
     args = parser.parse_args()
     
     # Set up logger
-    setup_logger(args.verbose)
+    setup_logger()
+
+    # Run analysis
+    predictions = make_predictions(args.directory)
+    print(predictions)

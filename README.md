@@ -25,8 +25,10 @@ Google Drive folder with description, data, and candidate results: https://drive
     ```
 
 **In-person live code editing challenge:**
-Start with the code in challenges/water_bottle_takehome/make_predictions.py. Ask the candidate to make the following changes in succession (when they finish the first, request the second, etc.):
-1. Make the script run your classifier on all files in a directory and output results as a CSV or JSON.
-2. Update your code to log some debugging info if and only if the `-v` arg is required.
-3. Make the script NOT error if it encounters an incorrectly formatted input file. Lines that errored should be marked as "error" in the CSV and errors should be logged even if `-v` was not used.
-4. Make the script load the answer key using `json.load("data/preprocessed_map.json")` and save performance statistics for your classifier to a file.
+Start with the code in challenges/water_bottle_takehome/make_predictions.py. Walk through the following steps with the candidate to make the script more robust:
+0. Clone the repo, read the code, set up a virtual env, and run make_predictions.py.
+1. How should we handle a file that is broken / doesn't load?
+2. How should the results be saved?
+3. Load up an answer key ("data/preprocessed_map.json") using `json.load(Path(answer_key_path).open()`. How should we generate and save performance stats?
+4. We want to print out some debugging info if and only if `-v` is provided. How should we do that? Provide this code snippet: `parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose output')`
+
