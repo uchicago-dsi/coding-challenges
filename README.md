@@ -31,3 +31,4 @@ Start with the code in challenges/water_bottle_takehome/make_predictions.py. Wal
 2. How should the results be saved?
 3. Load up an answer key ("data/preprocessed_map.json") using `json.load(Path(answer_key_path).open()`. How should we generate and save performance stats?
 4. We want to print out some debugging info if and only if `-v` is provided. How should we do that? Provide this code snippet: `parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose output')`
+
