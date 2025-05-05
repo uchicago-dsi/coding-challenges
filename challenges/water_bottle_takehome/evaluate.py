@@ -54,6 +54,7 @@ if __name__ == "__main__":
     )
 
     # Write to file in a readable format
+    print(RESULTS_PATH)
     with Path.open(RESULTS_PATH, "w") as f:
         # Write total correct and incorrect counts
         f.write("Top-line results:\n")
@@ -66,5 +67,6 @@ if __name__ == "__main__":
             all_combo_counts[col] = all_combo_counts[col].str.pad(
                 all_combo_counts[col].str.len().max() + 1, side="right"
             )
+        f.write("TYPE\t\tACTUAL\tPRED\tCOUNT\n")
         for _, row in all_combo_counts.iterrows():
             f.write(f"{row['type']}\t{row['actual']}\t{row['predicted']}\t{row[0]}\n")
