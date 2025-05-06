@@ -1,0 +1,14 @@
+Top-line results:
+labeled: 2 correct, 0 incorrect
+unlabeled: 20 correct, 2 incorrect
+val: 2 correct, 0 incorrect
+
+All combination counts:
+TYPE		ACTUAL	PRED	COUNT
+labeled   	bottom 	bottom 	1  
+labeled   	top    	top    	1  
+unlabeled 	bottom 	bottom 	11 
+unlabeled 	top    	bottom 	2  
+unlabeled 	top    	top    	9  
+val       	bottom 	bottom 	1  
+val       	top    	top    	1  
