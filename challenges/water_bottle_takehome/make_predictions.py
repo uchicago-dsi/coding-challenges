@@ -50,10 +50,11 @@ def make_predictions(directory_path) -> dict:
     Returns:
         dict: A dictionary where each key is a file name and each value is the prediction.
     """
-    logging.info("Analysis completed successfully")
     predictions = {}
     for fpath in Path(directory_path).glob('*.csv'):
         predictions[fpath.stem] = classify_preprocessed_audio(fpath)
+    
+    logging.info("Analysis completed successfully")
 
     return predictions
 
