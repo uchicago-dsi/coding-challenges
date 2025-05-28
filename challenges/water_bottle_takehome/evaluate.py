@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
     # Get counts of all combinations of actual and predicted
     all_combo_counts = (
-        results.groupby(["type", "actual", "predicted"]).size().reset_index()
+        results.fillna("none").groupby(["type", "actual", "predicted"]).size().reset_index()
     )
 
     # Write to file in a readable format
