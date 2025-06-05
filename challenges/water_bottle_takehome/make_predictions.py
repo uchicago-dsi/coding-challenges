@@ -9,7 +9,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-from candidate_code.water_bottle_challenge import classify_preprocessed_audio
+from candidate_code.water_bottle_challenge.water_bottle_challenge import classify_preprocessed_audio
 
 def setup_logger(verbose=False):
     """Set up and configure root logger with appropriate level based on verbose flag."""

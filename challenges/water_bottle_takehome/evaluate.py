@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 import pandas as pd
-from candidate_code import water_bottle_challenge
+from candidate_code.water_bottle_challenge import water_bottle_challenge
 
 DATA_DIR = Path("data/")
 PREPROCESSED_DATA_DIR = DATA_DIR / "preprocessed"
