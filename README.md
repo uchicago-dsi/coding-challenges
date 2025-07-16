@@ -32,3 +32,20 @@ Start with the code in challenges/water_bottle_takehome/make_predictions.py. Wal
 3. Load up an answer key ("data/preprocessed_map.json") using `json.load(Path(answer_key_path).open()`. How should we generate and save performance stats?
 4. We want to print out some debugging info if and only if `-v` is provided. How should we do that? Provide this code snippet: `parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose output')`
 
+### File Processing Take-Home
+This challenge is intended for software engineering candidates and tests the candidate's basic Python software development skills.
+
+Google Drive folder with description, data, and candidate results: https://drive.google.com/drive/folders/11b685QZpB4xPkiAD2h3BhND2KF7Vm0Jr
+
+**To evaluate:**
+1. Copy the candidate's code into file_processing_takehome.
+2. Create an empty directory called data/ in file_processing_takehome.
+3. Run the following to test their code in the same simulated setting provided to the candidate:
+```
+python process_files.py data/  &
+python process_files.py data/ &
+python simulation.py data/ --time-scale 0.1
+```
+
+
+
